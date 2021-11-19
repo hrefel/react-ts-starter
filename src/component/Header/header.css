@@ -8,6 +8,10 @@ nav {
   color: rgb(29, 180, 250);
 }
 
+.logo {
+  cursor: pointer;
+}
+
 .menu-header {
   margin: 5px;
 }
@@ -16,11 +20,13 @@ nav {
   padding: 10px;
   color: rgb(29, 180, 250);
   cursor: pointer;
-  transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  /* font-weight: bolder; */
   margin: 5px;
   text-decoration: none;
+  transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .menu-header a:hover {
-  background-color: rgb(75, 75, 75);
+  /* background-color: rgb(75, 75, 75); */
+  color: rgb(60, 60, 60);
   border-radius: 5px;
 }
