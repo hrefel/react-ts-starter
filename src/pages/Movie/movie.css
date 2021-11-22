@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+body {
+    background-color: #091420;
+}
+
+nav {
+    background-color: #396EB0;
+    box-shadow: rgba(57, 111, 176, 0.5) 0px 4px 12px;
+}
+
+.content-movie {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.card-movie {
+    background-color: rgba(255, 255, 255, 0.522);
+    padding: 0 10px 10px;
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 4px;
+    align-content: center;
+    align-items: center;
+    
+    /* min-width: 400px; */
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 54px 55px, rgba(247, 247, 247, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(124, 124, 124, 0.09) 0px -3px 5px;}
+
+.card-movie .card-movie-desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.card-movie .image {
+    
+
+}
+img {
+    /* max-height: 250px; */
+    /* max-height: 250px;
+    max-width: 250px; */
+}
+
+.card-movie-desc span {
+    font-family: 'Merriweather', serif; 
+    color: rgb(39, 39, 39);
+    
+    
+}
+.card-movie-desc span.movie-year {
+    font-size: 15px;
+    letter-spacing: 5px;
+}
+
+.card-movie-desc span.movie-title {
+    font-size: 20px;
+    /* line-height: 10px; */
+    /* word-spacing: 5px; */
+}
