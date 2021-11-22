@@ -11,7 +11,8 @@ export const Header: FunctionComponent<any> = ({ logo = "Header" }) => {
       </div>
       <div className="menu-header">
         <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+        {/* <Link to="/about">About</Link> */}
+        <Link to="/movie">Movie List</Link>
       </div>
     </nav>
   );
