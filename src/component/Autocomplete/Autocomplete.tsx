@@ -1,14 +1,13 @@
 import React, { Fragment } from "react";
-import './autocomplete.css';
+// import "./autocomplete.css";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
+
 interface PropsAutocomplete {
-  suggestions: string[];
+  suggestions?: string[];
 }
 
 interface AutocompleteState {
-  activeSuggestion: any;
-  filteredSuggestions: any;
-  showSuggestions: boolean;
-  userInput: string;
+  itemsSuggestion: any;
 }
 
 export default class Autocomplete extends React.Component<
@@ -18,111 +17,76 @@ export default class Autocomplete extends React.Component<
   constructor(props: PropsAutocomplete) {
     super(props);
     this.state = {
-      activeSuggestion: 0,
-      filteredSuggestions: [],
-      showSuggestions: false,
-      userInput: "",
-    };
-
-    this.onChangeHandler.bind(this);
-    this.onClick.bind(this);
-    this.onKeyDown.bind(this);
+      itemsSuggestion: []
+    }
+    
   }
 
-  onChangeHandler = (e: any) => {
-      console.log('onchange');
-    const { suggestions } = this.props;
-    const userInput = e.currentTarget.value;
-
-    const filteredSuggestions = suggestions.filter((suggestion: any) => {
-      suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1;
-    });
-
+  componentDidMount() {
     this.setState({
-      activeSuggestion: 0,
-      filteredSuggestions,
-      showSuggestions: true,
-      userInput: e.currentTarget.value,
+      itemsSuggestion: [
+        {
+          id: 0,
+          name: "Cobol",
+        },
+        {
+          id: 1,
+          name: "JavaScript",
+        },
+        {
+          id: 2,
+          name: "Basic",
+        },
+        {
+          id: 3,
+          name: "PHP",
+        },
+        {
+          id: 4,
+          name: "Java",
+        },
+      ],
     });
+  }
+
+  handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results);
   };
 
-  onClick = (e: any) => {
-    this.setState({
-      activeSuggestion: 0,
-      filteredSuggestions: [],
-      showSuggestions: false,
-      userInput: e.currentTarget.innerText,
-    });
+  handleOnHover = (result) => {
+    // the item hovered
+    console.log(result);
   };
 
-  onKeyDown = (e: any) => {
-    const { activeSuggestion, filteredSuggestions } = this.state;
+  handleOnSelect = (item) => {
+    // the item selected
+    console.log(item);
+  };
 
-    if (e.keyCode === 13) {
-      this.setState({
-        activeSuggestion: 0,
-        showSuggestions: false,
-        userInput: filteredSuggestions[activeSuggestion],
-      });
-    } else if (e.keyCode === 38) {
-      if (activeSuggestion === 0) return;
-    } else if (e.keyCode === 40) {
-      if (activeSuggestion - 1 === filteredSuggestions.length) return;
-    }
-    this.setState({ activeSuggestion: activeSuggestion + 1 });
+  handleOnFocus = () => {
+    console.log("Focused");
+  };
+
+  formatResult = (item) => {
+    console.log(item);
+    return item;
+    // return (<p dangerouslySetInnerHTML={{__html: '<strong>'+item+'</strong>'}}></p>); //To format result as html
   };
 
   render(): React.ReactNode {
-    const {
-      onChangeHandler,
-      onClick,
-      onKeyDown,
-      state: {
-        activeSuggestion,
-        filteredSuggestions,
-        showSuggestions,
-        userInput,
-      },
-    } = this;
-
-    let suggestionsListComponent;
-    if (showSuggestions && userInput) {
-      if (filteredSuggestions.length) {
-        suggestionsListComponent = (
-          <ul className="suggestions">
-            {filteredSuggestions.map((suggestion: any, index: number) => {
-              let className;
-
-              if (index === activeSuggestion) {
-                className = "sugesstion-active";
-              }
-
-              return (
-                <li className={className} key={suggestion} onClick={onClick}>
-                  {suggestion}
-                </li>
-              );
-            })}
-          </ul>
-        );
-      }
-    } else {
-      suggestionsListComponent = (
-        <div className="no-suggestions">
-          <em>No sugesstion available</em>
-        </div>
-      );
-    }
-
     return (
       <Fragment>
-        <input
-          type="text"
-          onChange={onChangeHandler}
-          onKeyDown={onKeyDown}
-          value={userInput}
+        <ReactSearchAutocomplete
+          items={this.state.itemsSuggestion}
+          onSearch={this.handleOnSearch}
+          onHover={this.handleOnHover}
+          onSelect={this.handleOnSelect}
+          onFocus={this.handleOnFocus}
+          autoFocus
+          formatResult={this.formatResult}
         />
-        {suggestionsListComponent}
       </Fragment>
     );
   }
